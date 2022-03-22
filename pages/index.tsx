@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 
 const Home: NextPage = () => {
   return (
@@ -18,7 +19,7 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js</a> and <a href="https://about.gitlab.com/">Gitlab</a> OAuth Integration
         </h1>
-        <Link href="/login" passHref>
+        <Link href={getGitlabOauthUrl()} passHref>
           <Button variant="contained" size="large" sx={{ m: '1rem' }}>
             Login Here
           </Button>
