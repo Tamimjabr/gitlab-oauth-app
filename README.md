@@ -16,4 +16,4 @@ Make sure to read [all requirements of the application](../../issues/). This inc
 Pay extra attention to the labels indicating if the requirement is required (~"req::required") or optional (~"req::optional").
 
 In this assignment, you must close issues and tasks ([ ]) that you implement. You must also create your issues (and close them) if you add any functionality.
->>>>>>> d8e44f70daabfb16e26d2c1c5071223f34610769
+
