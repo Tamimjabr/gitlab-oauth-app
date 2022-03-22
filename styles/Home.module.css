@@ -28,8 +28,13 @@
   flex-grow: 1;
 }
 
-.title a {
+.title a:nth-child(1) {
   color: #0070f3;
+  text-decoration: none;
+}
+
+.title a:nth-child(2) {
+  color: #f3a600;
   text-decoration: none;
 }
 
