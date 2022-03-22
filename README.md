@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Assignment WT - OAuth
 
-## Getting Started
+The ability to delegate access between systems is central in modern web applications. One popular standard för access delegation is OAuth (Open Authorization). The OAuth flow can seem complicated at first glance, but it is essential to understand the different stakeholder's (client/consumer/service provider) involvement and communication.
 
-First, run the development server:
+## The assignment
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Your assignment is to implement a three-legged OAuth2 access delegation between a server-side rendered web application (the consumer) and GitLab (the service provider).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The user should be able to log in on the consumer application using her gitlab.lnu.se account (#10) and show some basic profile information (#11), including at least the 101 most recent GitLab activities (#12).
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+You are not allowed to use any external packages/modules that have built-in support for OAuth (#2).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Requirements
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Make sure to read [all requirements of the application](../../issues/). This includes: (#1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12)
+Pay extra attention to the labels indicating if the requirement is required (~"req::required") or optional (~"req::optional").
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+In this assignment, you must close issues and tasks ([ ]) that you implement. You must also create your issues (and close them) if you add any functionality.
+>>>>>>> d8e44f70daabfb16e26d2c1c5071223f34610769
