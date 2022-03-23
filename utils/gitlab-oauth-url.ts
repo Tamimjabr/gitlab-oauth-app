@@ -1,5 +1,3 @@
-import qs from 'qs';
-
 export const getGitlabOauthUrl = (): string => {
   const gitlabOauthUrl = 'https://gitlab.lnu.se/oauth/authorize'
   const params = {
@@ -13,6 +11,7 @@ export const getGitlabOauthUrl = (): string => {
       'email'
     ].join(' '),
   }
+  const paramsToUse = new URLSearchParams(params)
 
-  return `${gitlabOauthUrl}?${qs.stringify(params)}`
+  return `${gitlabOauthUrl}?${paramsToUse.toString()}`
 }
