@@ -1,4 +1,4 @@
-import { ConnectingAirportsOutlined } from "@mui/icons-material"
+import qs from 'qs';
 
 export const getGitlabOauthUrl = (): string => {
   const gitlabOauthUrl = 'https://gitlab.lnu.se/oauth/authorize'
@@ -14,7 +14,5 @@ export const getGitlabOauthUrl = (): string => {
     ].join(' '),
   }
 
-  const qs = new URLSearchParams(params)
-
-  return `${gitlabOauthUrl}?${qs.toString()}`
+  return `${gitlabOauthUrl}?${qs.stringify(params)}`
 }
