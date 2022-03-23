@@ -31,7 +31,7 @@ function CustomToolbar () {
   );
 }
 
-export default function ActivitiesTable ({ rows }) {
+export default function ActivitiesTable ({ rows }: any) {
   return (
     <div style={{ height: 500, width: '100%' }}>
       <DataGrid

@@ -19,13 +19,20 @@ const Header = ({ userInfo }: { userInfo: GitlabUserInfo }) => {
             OAuth App
           </Typography>
           {userInfo && (
-            <Link href='/profile' passHref>
-              <Button color="inherit">
-                <Typography variant="body2" component="span">
-                  {userInfo.name}
-                </Typography>
-              </Button>
-            </Link>
+            <>
+              <Link href='/profile' passHref>
+                <Button color="inherit">
+                  <Typography variant="body2" component="span">
+                    {userInfo.name}
+                  </Typography>
+                </Button>
+              </Link>
+              <Link href='/logout' passHref>
+                <Button variant='contained' color='warning'>
+                  Logout
+                </Button>
+              </Link>
+            </>
           )}
         </Toolbar>
       </AppBar>
