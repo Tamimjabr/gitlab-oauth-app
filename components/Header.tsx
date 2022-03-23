@@ -6,26 +6,28 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { GitlabUserInfo } from '../intergrations/gitlab-user-info';
+import Link from 'next/link';
 
 
-const Header = ({ userInfo }: any) => {
+const Header = ({ userInfo }: { userInfo: GitlabUserInfo }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            OAuth App
           </Typography>
-          <Button color="inherit">Login</Button>
+          {userInfo && (
+            <Link href='/profile' passHref>
+              <Button color="inherit">
+                <Typography variant="body2" component="span">
+                  {userInfo.name}
+                </Typography>
+              </Button>
+            </Link>
+          )}
+
         </Toolbar>
       </AppBar>
     </Box>
