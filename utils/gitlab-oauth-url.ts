@@ -8,9 +8,7 @@ export const getGitlabOauthUrl = (): string => {
     response_type: 'code',
     scope: [
       'read_api',
-      'read_user',
-      'profile',
-      'email'
+      'read_user'
     ].join(' '),
   }
 
