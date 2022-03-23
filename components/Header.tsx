@@ -27,7 +27,6 @@ const Header = ({ userInfo }: { userInfo: GitlabUserInfo }) => {
               </Button>
             </Link>
           )}
-
         </Toolbar>
       </AppBar>
     </Box>

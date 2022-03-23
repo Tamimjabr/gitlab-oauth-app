@@ -9,6 +9,7 @@ import ProfileCard from '../components/ProfileCard'
 import { Box } from '@mui/material'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import Header from '../components/Header'
+import ProfileTabs from '../components/ProfileTabs'
 
 
 const Profile = ({ userInfo, error }: any) => {
@@ -19,6 +20,7 @@ const Profile = ({ userInfo, error }: any) => {
   return (
     <>
       <Header userInfo={userInfo} />
+      <ProfileTabs />
       <Box sx={{ m: 'auto', width: '100%', minHeight: '100vh', display: 'flex' }}>
         <ProfileCard userInfo={userInfo} />
       </Box></>

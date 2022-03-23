@@ -7,6 +7,7 @@ import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
 import ActivitiesTable from '../components/ActivitiesTable'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import Header from '../components/Header'
+import ProfileTabs from '../components/ProfileTabs'
 
 
 const Activities = ({ userEvents, userInfo, error }: any) => {
@@ -15,8 +16,11 @@ const Activities = ({ userEvents, userInfo, error }: any) => {
     return <Error statusCode={error.code} title={error.message} />
   }
   return (
-    <>      <Header userInfo={userInfo} />
-      <div><ActivitiesTable rows={userEvents} /></div></>
+    <>
+      <Header userInfo={userInfo} />
+      <ProfileTabs />
+      <div><ActivitiesTable rows={userEvents} /></div>
+    </>
 
   )
 }
