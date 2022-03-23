@@ -5,6 +5,7 @@ import { withIronSessionSsr } from "iron-session/next"
 import { GetServerSidePropsResult } from 'next'
 import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
 import ActivitiesTable from '../components/ActivitiesTable'
+import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 
 
 const Activities = ({ userEvents, error }: any) => {
@@ -22,6 +23,16 @@ export const getServerSideProps = withIronSessionSsr(
     userEvents: GitlabUserEvent[] | null,
     error: { code: number, message: string } | null
   }>> {
+
+    if (!req.session.tokens) {
+      return {
+        redirect: {
+          destination: getGitlabOauthUrl(),
+          permanent: false,
+        },
+      }
+    }
+    
     try {
       const userEvents: GitlabUserEvent[] = await getGitlabUserEvents(req.session.tokens.accessToken)
 

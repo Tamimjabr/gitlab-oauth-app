@@ -7,6 +7,7 @@ import Error from 'next/error'
 import { GetServerSidePropsResult } from 'next'
 import ProfileCard from '../components/ProfileCard'
 import { Box } from '@mui/material'
+import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 
 
 const Profile = ({ userInfo, error }: any) => {
@@ -25,10 +26,26 @@ export const getServerSideProps = withIronSessionSsr(
     error: { code: number, message: string } | null
   }>> {
     try {
-      const code = query.code
-      const tokens = await getGitlabOauthTokens(code)
-      req.session.tokens = tokens
-      await req.session.save()
+
+      if (query.code) {
+        const code = query.code
+        const tokens = await getGitlabOauthTokens(code)
+        req.session.tokens = tokens
+        await req.session.save()
+        return {
+          redirect: {
+            destination: '/profile',
+            permanent: false,
+          },
+        }
+      } else if (!req.session.tokens) {
+        return {
+          redirect: {
+            destination: getGitlabOauthUrl(),
+            permanent: false,
+          },
+        }
+      }
 
       const userInfo: GitlabUserInfo = await getGitlabUserInfo(req.session.tokens.accessToken)
 
