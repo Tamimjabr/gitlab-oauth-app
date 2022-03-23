@@ -1,6 +1,7 @@
 import React from 'react'
 import { withIronSessionSsr } from "iron-session/next"
 import { getGitlabOauthTokens } from '../utils/gitlab-oauth-tokens'
+import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
 
 const Profile = () => {
   return (
@@ -12,19 +13,18 @@ export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps ({ req, query }: any) {
     const code = query.code
     const tokens = await getGitlabOauthTokens(code)
+    req.session.tokens = tokens
+    await req.session.save()
+
+    
+
     return {
       props: {
 
       }
     }
-  }, {
-  cookieName: "myapp_cookiename",
-  password: "complex_password_at_least_32_characters_long",
-  // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
   },
-}
+  IRON_SESSION_CONFIG
 )
 
 export default Profile
