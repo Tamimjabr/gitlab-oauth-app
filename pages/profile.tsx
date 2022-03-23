@@ -8,6 +8,7 @@ import { GetServerSidePropsResult } from 'next'
 import ProfileCard from '../components/ProfileCard'
 import { Box } from '@mui/material'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
+import Header from '../components/Header'
 
 
 const Profile = ({ userInfo, error }: any) => {
@@ -16,7 +17,12 @@ const Profile = ({ userInfo, error }: any) => {
   }
 
   return (
-    <Box sx={{ m: 'auto', width: '100%', minHeight: '100vh', display: 'flex' }}><ProfileCard userInfo={userInfo} /></Box>
+    <>
+      <Header userInfo={userInfo} />
+      <Box sx={{ m: 'auto', width: '100%', minHeight: '100vh', display: 'flex' }}>
+        <ProfileCard userInfo={userInfo} />
+      </Box></>
+
   )
 }
 
@@ -48,6 +54,9 @@ export const getServerSideProps = withIronSessionSsr(
       }
 
       const userInfo: GitlabUserInfo = await getGitlabUserInfo(req.session.tokens.accessToken)
+
+      req.session.userInfo = userInfo
+      await req.session.save()
 
       return {
         props: {

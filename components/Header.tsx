@@ -7,7 +7,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Header = () => {
+
+const Header = ({ userInfo }: any) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -30,5 +31,6 @@ const Header = () => {
     </Box>
   );
 }
+
 
 export default Header
