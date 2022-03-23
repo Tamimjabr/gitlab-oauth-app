@@ -4,7 +4,7 @@ export interface GitlabUserInfo {
   id: number,
   name: string,
   username: string
-  public_email: string,
+  email: string,
   avatar_url: string
   last_activity_on: string
 }
@@ -21,7 +21,7 @@ export const getGitlabUserInfo = async (accessToken: string) => {
     return response.data
 
   } catch (error: any) {
-    console.log(error.message)
+
     throw new Error("Failed to get GitLab user info")
   }
 }

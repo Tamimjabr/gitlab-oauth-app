@@ -28,7 +28,6 @@ export const getGitlabOauthTokens = async (code: string) => {
       refreshToken: response.data.refresh_token,
     }
   } catch (error: any) {
-    console.log(error.message)
     throw new Error("Failed to get GitLab OAuth tokens")
   }
 
