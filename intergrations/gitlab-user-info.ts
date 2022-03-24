@@ -42,16 +42,24 @@ export const getGitlabUserInfo = async (accessToken: string) => {
   }
 }
 
-export const getGitlabUserEvents = async (accessToken: string) => {
+export const getGitlabUserEvents = async (accessToken: string, perPage: number = 100, page: number = 1) => {
   try {
     const url = "https://gitlab.lnu.se/api/v4/events"
 
-    const response = await axios.get<GitlabUserEvent[]>(url, {
+    const params = {
+      per_page: perPage,
+      page,
+    }
+    const config = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      }
-    })
+      },
+      params
+    }
+
+    const response = await axios.get<GitlabUserEvent[]>(url, config)
     return response.data
+
 
   } catch (error: any) {
     throw new Error("Failed to get GitLab user events")
