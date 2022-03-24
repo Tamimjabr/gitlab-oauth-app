@@ -18,7 +18,6 @@ const Home = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header userInfo={userInfo} />
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js</a> and <a href="https://about.gitlab.com/">Gitlab</a> OAuth Integration
@@ -53,7 +52,7 @@ const Home = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
 }
 
 export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps ({ req, query }: any): Promise<GetServerSidePropsResult<{
+  async function getServerSideProps ({ req }: any): Promise<GetServerSidePropsResult<{
     userInfo: GitlabUserInfo | null,
   }>> {
 

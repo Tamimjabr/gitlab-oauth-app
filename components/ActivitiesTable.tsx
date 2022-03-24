@@ -33,7 +33,7 @@ function CustomToolbar () {
 
 export default function ActivitiesTable ({ rows }: any) {
   return (
-    <div style={{ height: 500, width: '100%' }}>
+    <div style={{ height: 500, width: '80%', margin: '1rem auto' }}>
       <DataGrid
         rows={rows} columns={columns}
         components={{

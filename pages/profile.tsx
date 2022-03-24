@@ -19,7 +19,6 @@ const Profile = ({ userInfo, error }: any) => {
 
   return (
     <>
-      <Header userInfo={userInfo} />
       <ProfileTabs />
       <Box sx={{ m: 'auto', width: '100%', minHeight: '100vh', display: 'flex' }}>
         <ProfileCard userInfo={userInfo} />
@@ -39,6 +38,7 @@ export const getServerSideProps = withIronSessionSsr(
         const code = query.code
         const tokens = await getGitlabOauthTokens(code)
         req.session.tokens = tokens
+  
         await req.session.save()
         return {
           redirect: {
