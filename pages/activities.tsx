@@ -44,7 +44,9 @@ export const getServerSideProps = withIronSessionSsr(
     }
 
     try {
-      const userEvents: GitlabUserEvent[] = await getGitlabUserEvents(req.session.tokens.accessToken)
+      const userEvents: GitlabUserEvent[] = await getGitlabUserEvents(req.session.tokens.accessToken, 100, 1)
+      const oneMoreUserEvent: GitlabUserEvent[] = await getGitlabUserEvents(req.session.tokens.accessToken, 1, 101)
+      userEvents.push(...oneMoreUserEvent)
       const userInfo: GitlabUserInfo = req.session.userInfo
       return {
         props: {
