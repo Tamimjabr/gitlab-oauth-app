@@ -1,55 +1,79 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { GitlabUserInfo } from '../intergrations/gitlab-user-info';
-
-
-
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
 
 const ProfileCard = ({ userInfo }: { userInfo: GitlabUserInfo }) => {
-
   return (
     <Card sx={{
-      flex: '0 1 500px', m: 'auto auto'
+      flex: '0 1 500px', m: 'auto auto', display: 'flex', justifyContent: 'center'
     }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: blue[500], width: 56, height: 56 }} aria-label="profile image" src={userInfo.avatar_url}>
-          </Avatar>
-        }
-        title={`
-          ${userInfo.name}
-        `}
-        subheader={`last activity: ${userInfo.last_activity_on}`}
-      />
-      < CardContent >
-        <Typography variant="body2" color="text.primary">
-          username: {userInfo.username}
-        </Typography>
-        <Typography variant="body2" color="text.primary">
-          public email: {userInfo.email}
-        </Typography>
-      </CardContent >
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          ID: {userInfo.id}
-        </Typography>
-      </CardContent>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <ListItem alignItems="center" sx={{ flexDirection: 'column', justifyContent: 'center' }}>
+          <Avatar sx={{ bgcolor: blue[500], width: 70, height: 70, m: '1.2rem' }} aria-label="profile image" src={userInfo.avatar_url} />
+          <ListItemText
+            primary={`${userInfo.name}`}
+            secondary={`last activity: ${userInfo.last_activity_on}`}
+          />
+        </ListItem>
+        <Divider variant="inset" component="li" />
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar >
+              <AlternateEmailRoundedIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary="Public Email"
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  {userInfo.email}
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+        <Divider variant="inset" component="li" />
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar  >
+              <PersonRoundedIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary="ID"
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  {userInfo.id}
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+      </List>
     </Card >
-  );
+  )
 }
 
 export default ProfileCard;

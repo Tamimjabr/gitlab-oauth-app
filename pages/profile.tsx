@@ -20,10 +20,9 @@ const Profile = ({ userInfo, error }: any) => {
   return (
     <>
       <ProfileTabs />
-      <Box sx={{ m: 'auto', width: '100%', minHeight: '100vh', display: 'flex' }}>
+      <Box sx={{ width: '100%', display: 'flex', m: '2rem auto' }}>
         <ProfileCard userInfo={userInfo} />
       </Box></>
-
   )
 }
 
@@ -81,7 +80,6 @@ export const getServerSideProps = withIronSessionSsr(
         }
       }
     }
-
   },
   IRON_SESSION_CONFIG
 )

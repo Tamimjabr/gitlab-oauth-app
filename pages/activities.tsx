@@ -19,7 +19,7 @@ const Activities = ({ userEvents, userInfo, error }: any) => {
   return (
     <>
       <ProfileTabs />
-      <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%" }}>Your last 101 activities</Typography>
+      <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%", textDecoration: 'underline' }}>Your Last 101 Activities</Typography>
       <div><ActivitiesTable rows={userEvents} /></div>
     </>
 
@@ -69,7 +69,6 @@ export const getServerSideProps = withIronSessionSsr(
         }
       }
     }
-
   },
   IRON_SESSION_CONFIG
 )
