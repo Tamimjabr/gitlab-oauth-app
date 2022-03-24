@@ -15,9 +15,11 @@ const columns: GridColDef[] = [
     field: 'author', headerName: "Author", width: 180, valueFormatter: (params: any) => params.value.username
   },
   { field: "action_name", headerName: "Action Name", width: 150 },
+  { field: "target_type", headerName: "Target Type", width: 150 },
+  { field: "target_title", headerName: "Target Title", width: 150 },
   {
     field: 'push_data', headerName: "Commit Title", width: 500, valueFormatter: (params: any) => params.value?.commit_title || ''
-  }
+  },
 ];
 
 function CustomToolbar () {

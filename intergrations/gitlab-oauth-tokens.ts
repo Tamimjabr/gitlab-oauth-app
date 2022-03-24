@@ -19,8 +19,6 @@ const url = "https://gitlab.lnu.se/oauth/token"
 
 export const getGitlabOauthTokens = async (code: string): Promise<Tokens> => {
   try {
-
-
     const params = {
       code,
       grant_type: 'authorization_code',
@@ -41,12 +39,10 @@ export const getGitlabOauthTokens = async (code: string): Promise<Tokens> => {
   } catch (error: any) {
     throw new Error("Failed to get GitLab OAuth tokens")
   }
-
 }
 
 export const refreshGitlabAccessToken = async (tokens: Tokens): Promise<Tokens> => {
   try {
-
     const params = {
       refresh_token: tokens.refreshToken,
       grant_type: 'refresh_token',
@@ -65,5 +61,4 @@ export const refreshGitlabAccessToken = async (tokens: Tokens): Promise<Tokens> 
   } catch (error: any) {
     throw new Error("Failed to refresh GitLab OAuth tokens")
   }
-
 }
