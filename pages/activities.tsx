@@ -8,6 +8,7 @@ import ActivitiesTable from '../components/ActivitiesTable'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import Header from '../components/Header'
 import ProfileTabs from '../components/ProfileTabs'
+import { Typography } from '@mui/material'
 
 
 const Activities = ({ userEvents, userInfo, error }: any) => {
@@ -18,6 +19,7 @@ const Activities = ({ userEvents, userInfo, error }: any) => {
   return (
     <>
       <Header userInfo={userInfo} />
+      <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%" }}>Your last 101 activities</Typography>
       <ProfileTabs />
       <div><ActivitiesTable rows={userEvents} /></div>
     </>

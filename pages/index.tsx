@@ -1,11 +1,15 @@
 import { Button } from '@mui/material'
-import type { NextPage } from 'next'
+import type { GetServerSidePropsResult, NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import Header from '../components/Header'
+import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
+import { GitlabUserInfo } from '../intergrations/gitlab-user-info'
 import styles from '../styles/Home.module.css'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
+import { withIronSessionSsr } from "iron-session/next"
 
-const Home: NextPage = () => {
+const Home = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -14,17 +18,27 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
+      <Header userInfo={userInfo} />
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js</a> and <a href="https://about.gitlab.com/">Gitlab</a> OAuth Integration
         </h1>
-        <Link href={getGitlabOauthUrl()} passHref>
-          <Button variant="contained" size="large" sx={{ m: '1rem' }}>
-            Login Here
-          </Button>
-        </Link>
-      </main>
+        {userInfo ? (
+          <Link href='/profile' passHref>
+            <Button variant="contained" size="large" sx={{ m: '1rem' }}>
+              Visit Your Profile
+            </Button>
+          </Link>
+        ) : (
+          <Link href={getGitlabOauthUrl()} passHref>
+            <Button variant="contained" size="large" sx={{ m: '1rem' }}>
+              Login Here
+            </Button>
+          </Link>
+        )
+        }
+
+      </main >
       <footer className={styles.footer}>
         <a
           href="https://tamim-cv.netlify.app"
@@ -34,8 +48,30 @@ const Home: NextPage = () => {
           Powered by Tamim Jabr
         </a>
       </footer>
-    </div>
+    </div >
   )
 }
+
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps ({ req, query }: any): Promise<GetServerSidePropsResult<{
+    userInfo: GitlabUserInfo | null,
+  }>> {
+
+    if (req.session?.userInfo) {
+      return {
+        props: {
+          userInfo: req.session?.userInfo,
+        }
+      }
+    }
+
+    return {
+      props: {
+        userInfo: null,
+      }
+    }
+  },
+  IRON_SESSION_CONFIG
+)
 
 export default Home
