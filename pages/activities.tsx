@@ -6,9 +6,9 @@ import { GetServerSidePropsResult } from 'next'
 import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
 import ActivitiesTable from '../components/ActivitiesTable'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
-import Header from '../components/Header'
 import ProfileTabs from '../components/ProfileTabs'
 import { Typography } from '@mui/material'
+import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
 
 
 const Activities = ({ userEvents, userInfo, error }: any) => {
@@ -18,8 +18,8 @@ const Activities = ({ userEvents, userInfo, error }: any) => {
   }
   return (
     <>
-      <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%" }}>Your last 101 activities</Typography>
       <ProfileTabs />
+      <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%" }}>Your last 101 activities</Typography>
       <div><ActivitiesTable rows={userEvents} /></div>
     </>
 
@@ -32,17 +32,20 @@ export const getServerSideProps = withIronSessionSsr(
     userEvents: GitlabUserEvent[] | null,
     error: { code: number, message: string } | null
   }>> {
-
-    if (!req.session.tokens || !req.session.userInfo) {
-      return {
-        redirect: {
-          destination: getGitlabOauthUrl(),
-          permanent: false,
-        },
-      }
-    }
-
     try {
+      if (req.session?.tokens && isExpiredAccessToken(req.session.tokens)) {
+        await updateTokens(req)
+      }
+
+      if (!req.session.tokens || !req.session.userInfo) {
+        return {
+          redirect: {
+            destination: getGitlabOauthUrl(),
+            permanent: false,
+          },
+        }
+      }
+
       const userEvents: GitlabUserEvent[] = await getGitlabUserEvents(req.session.tokens.accessToken, 100, 1)
       const oneMoreUserEvent: GitlabUserEvent[] = await getGitlabUserEvents(req.session.tokens.accessToken, 1, 101)
       userEvents.push(...oneMoreUserEvent)

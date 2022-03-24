@@ -35,9 +35,7 @@ export const getGitlabUserInfo = async (accessToken: string) => {
       }
     })
     return response.data
-
   } catch (error: any) {
-
     throw new Error("Failed to get GitLab user info")
   }
 }
@@ -59,8 +57,6 @@ export const getGitlabUserEvents = async (accessToken: string, perPage: number =
 
     const response = await axios.get<GitlabUserEvent[]>(url, config)
     return response.data
-
-
   } catch (error: any) {
     throw new Error("Failed to get GitLab user events")
   }
