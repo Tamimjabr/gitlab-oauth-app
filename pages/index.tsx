@@ -7,6 +7,7 @@ import { GitlabUserInfo } from '../intergrations/gitlab-user-info'
 import styles from '../styles/Home.module.css'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import { withIronSessionSsr } from "iron-session/next"
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 const Home = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
   return (
@@ -28,7 +29,7 @@ const Home = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
         {userInfo ? (
           <Link href='/profile' passHref>
             <Button variant="contained" size="large" sx={{ m: '1rem' }}>
-              Visit Your Profile
+              Visit Your Profile < AccountCircleRoundedIcon sx={{ marginLeft: '0.2rem' }} />
             </Button>
           </Link>
         ) : (
