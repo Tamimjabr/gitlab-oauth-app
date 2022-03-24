@@ -1,4 +1,4 @@
-import { refreshGitlabAccessToken } from './../intergrations/gitlab-oauth-tokens';
+import { refreshGitlabAccessToken } from './../intergrations/gitlab-oauth-tokens'
 import { Tokens } from "../intergrations/gitlab-oauth-tokens"
 
 export const isExpiredAccessToken = (tokens: Tokens): boolean => {

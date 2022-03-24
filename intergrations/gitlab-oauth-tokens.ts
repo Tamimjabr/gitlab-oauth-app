@@ -1,5 +1,5 @@
 import axios from "axios"
-import qs from "qs";
+import qs from "qs"
 
 interface GitLabTokensInfo {
   access_token: string

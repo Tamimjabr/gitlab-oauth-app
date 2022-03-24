@@ -1,4 +1,4 @@
-import qs from 'qs';
+import qs from 'qs'
 
 export const getGitlabOauthUrl = (): string => {
   const gitlabOauthUrl = 'https://gitlab.lnu.se/oauth/authorize'

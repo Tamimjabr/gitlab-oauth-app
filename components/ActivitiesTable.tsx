@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 import {
   DataGrid,
   GridToolbarContainer,
@@ -7,7 +7,7 @@ import {
   GridToolbarExport,
   GridToolbarDensitySelector,
   GridColDef,
-} from '@mui/x-data-grid';
+} from '@mui/x-data-grid'
 
 const columns: GridColDef[] = [
   { field: "created_at", headerName: "Created At", width: 250 },
@@ -20,7 +20,7 @@ const columns: GridColDef[] = [
   {
     field: 'push_data', headerName: "Commit Title", width: 500, valueFormatter: (params: any) => params.value?.commit_title || ''
   },
-];
+]
 
 function CustomToolbar () {
   return (
@@ -30,7 +30,7 @@ function CustomToolbar () {
       <GridToolbarDensitySelector />
       <GridToolbarExport />
     </GridToolbarContainer>
-  );
+  )
 }
 
 export default function ActivitiesTable ({ rows }: any) {
@@ -43,5 +43,5 @@ export default function ActivitiesTable ({ rows }: any) {
         }}
       />
     </div>
-  );
+  )
 }

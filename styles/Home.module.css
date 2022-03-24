@@ -3,6 +3,7 @@
 }
 
 .main {
+  width: 100%;
   min-height: 100vh;
   padding: 4rem 2rem;
   flex: 1;
@@ -10,6 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  word-break: break-word;
 }
 
 .footer {

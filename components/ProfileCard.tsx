@@ -1,16 +1,16 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import { blue } from '@mui/material/colors';
-import { GitlabUserInfo } from '../intergrations/gitlab-user-info';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
-import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
+import * as React from 'react'
+import Card from '@mui/material/Card'
+import { blue } from '@mui/material/colors'
+import { GitlabUserInfo } from '../intergrations/gitlab-user-info'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import Divider from '@mui/material/Divider'
+import ListItemText from '@mui/material/ListItemText'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Avatar from '@mui/material/Avatar'
+import Typography from '@mui/material/Typography'
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
+import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded'
 
 const ProfileCard = ({ userInfo }: { userInfo: GitlabUserInfo }) => {
   return (
@@ -76,4 +76,4 @@ const ProfileCard = ({ userInfo }: { userInfo: GitlabUserInfo }) => {
   )
 }
 
-export default ProfileCard;
+export default ProfileCard

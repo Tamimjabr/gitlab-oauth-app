@@ -1,11 +1,11 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { GitlabUserInfo } from '../intergrations/gitlab-user-info';
-import Link from 'next/link';
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import { GitlabUserInfo } from '../intergrations/gitlab-user-info'
+import Link from 'next/link'
 
 
 const Header = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
@@ -41,7 +41,7 @@ const Header = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
         </Toolbar>
       </AppBar >
     </Box >
-  );
+  )
 }
 
 
