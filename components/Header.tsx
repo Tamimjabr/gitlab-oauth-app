@@ -13,11 +13,15 @@ const Header = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link href='/' passHref>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              OAuth App
-            </Typography>
-          </Link>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }} >
+            <Link href='/' passHref >
+              <Button color="inherit">
+                <Typography variant="h5" component="div">
+                  OAuth App
+                </Typography>
+              </Button>
+            </Link>
+          </Typography>
           {userInfo && (
             <>
               <Link href='/profile' passHref>
@@ -28,15 +32,15 @@ const Header = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
                 </Button>
               </Link>
               <Link href='/logout' passHref>
-                <Button variant='contained' color='warning'>
+                <Button variant='contained' color='warning' sx={{ m: 'auto 2rem' }}>
                   Logout
                 </Button>
               </Link>
             </>
           )}
         </Toolbar>
-      </AppBar>
-    </Box>
+      </AppBar >
+    </Box >
   );
 }
 
