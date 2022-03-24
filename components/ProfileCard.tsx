@@ -14,7 +14,7 @@ import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded
 
 const ProfileCard = ({ userInfo }: { userInfo: GitlabUserInfo }) => {
   return (
-    <Card sx={{
+    <Card className="animate__animated animate__fadeInUp" sx={{
       flex: '0 1 500px', m: 'auto auto', display: 'flex', justifyContent: 'center'
     }}>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>

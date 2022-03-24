@@ -10,6 +10,7 @@ import { Box } from '@mui/material'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import ProfileTabs from '../components/ProfileTabs'
 import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
+import Head from 'next/head'
 
 
 const Profile = ({ userInfo, error }: any) => {
@@ -19,10 +20,20 @@ const Profile = ({ userInfo, error }: any) => {
 
   return (
     <>
+      <Head>
+        <title>Profile</title>
+        <meta name="profile" content="user profile page" />
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+      </Head>
       <ProfileTabs />
       <Box sx={{ width: '100%', display: 'flex', m: '2rem auto' }}>
         <ProfileCard userInfo={userInfo} />
-      </Box></>
+      </Box>
+    </>
   )
 }
 

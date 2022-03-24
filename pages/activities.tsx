@@ -9,6 +9,7 @@ import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import ProfileTabs from '../components/ProfileTabs'
 import { Typography } from '@mui/material'
 import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
+import Head from 'next/head'
 
 
 const Activities = ({ userEvents, userInfo, error }: any) => {
@@ -18,9 +19,18 @@ const Activities = ({ userEvents, userInfo, error }: any) => {
   }
   return (
     <>
+      <Head>
+        <title>Activities</title>
+        <meta name="activities" content="User activities" />
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+      </Head>
       <ProfileTabs />
       <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%", textDecoration: 'underline' }}>Your Last 101 Activities</Typography>
-      <div><ActivitiesTable rows={userEvents} /></div>
+      <div className='animate__animated animate__fadeInUp'><ActivitiesTable rows={userEvents} /></div>
     </>
 
   )
