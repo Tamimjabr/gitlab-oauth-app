@@ -24,10 +24,6 @@ const Profile = ({ userInfo, error }: any) => {
         <title>Profile</title>
         <meta name="profile" content="user profile page" />
         <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-        />
       </Head>
       <ProfileTabs />
       <Box sx={{ width: '100%', display: 'flex', m: '2rem auto' }}>

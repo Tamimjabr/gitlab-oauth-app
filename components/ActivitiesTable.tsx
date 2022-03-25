@@ -7,12 +7,17 @@ import {
   GridToolbarExport,
   GridToolbarDensitySelector,
   GridColDef,
+  GridCellValue,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid'
+import { GitlabUserEvent } from '../intergrations/gitlab-user-info'
+
+
 
 const columns: GridColDef[] = [
   { field: "created_at", headerName: "Created At", width: 250 },
   {
-    field: 'author', headerName: "Author", width: 180, valueFormatter: (params: any) => params.value.username
+    field: 'author', headerName: "Author", width: 180, valueFormatter: (params: any) => params.value?.username
   },
   { field: "action_name", headerName: "Action Name", width: 150 },
   { field: "target_type", headerName: "Target Type", width: 150 },
@@ -33,7 +38,7 @@ function CustomToolbar () {
   )
 }
 
-export default function ActivitiesTable ({ rows }: any) {
+export default function ActivitiesTable ({ rows }: { rows: GitlabUserEvent[] }) {
   return (
     <div style={{ height: 500, width: '80%', margin: '1rem auto' }}>
       <DataGrid
