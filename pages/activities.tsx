@@ -11,8 +11,13 @@ import { Typography } from '@mui/material'
 import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
 import Head from 'next/head'
 
+type ActivitiesProps = {
+  userInfo: GitlabUserInfo | null,
+  userEvents: GitlabUserEvent[] | null,
+  error: { code: number, message: string } | null
+}
 
-const Activities = ({ userEvents, userInfo, error }: any) => {
+const Activities = ({ userEvents, userInfo, error }: ActivitiesProps) => {
 
   if (error?.code) {
     return <Error statusCode={error.code} title={error.message} />
@@ -26,18 +31,16 @@ const Activities = ({ userEvents, userInfo, error }: any) => {
       </Head>
       <ProfileTabs />
       <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%", textDecoration: 'underline' }}>Your Last 101 Activities</Typography>
-      <div className='animate__animated animate__fadeInUp'><ActivitiesTable rows={userEvents} /></div>
+      <div className='animate__animated animate__fadeInUp'>
+        {userEvents && <ActivitiesTable rows={userEvents} />}
+      </div>
     </>
 
   )
 }
 
 export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps ({ req, query }: any): Promise<GetServerSidePropsResult<{
-    userInfo: GitlabUserInfo | null,
-    userEvents: GitlabUserEvent[] | null,
-    error: { code: number, message: string } | null
-  }>> {
+  async function getServerSideProps ({ req }: any): Promise<GetServerSidePropsResult<ActivitiesProps>> {
     try {
       if (req.session?.tokens && isExpiredAccessToken(req.session.tokens)) {
         await updateTokens(req)

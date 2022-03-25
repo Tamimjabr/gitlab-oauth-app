@@ -9,7 +9,7 @@ const Logout = () => {
 }
 
 export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps ({ req, query }: any) {
+  async function getServerSideProps ({ req }: any) {
     await req.session.destroy()
 
     return {

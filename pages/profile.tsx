@@ -12,8 +12,12 @@ import ProfileTabs from '../components/ProfileTabs'
 import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
 import Head from 'next/head'
 
+type ProfileProps = {
+  userInfo: GitlabUserInfo | null,
+  error: { code: number, message: string } | null
+}
 
-const Profile = ({ userInfo, error }: any) => {
+const Profile = ({ userInfo, error }: ProfileProps) => {
   if (error?.code) {
     return <Error statusCode={error.code} title={error.message} />
   }
@@ -27,17 +31,14 @@ const Profile = ({ userInfo, error }: any) => {
       </Head>
       <ProfileTabs />
       <Box sx={{ width: '100%', display: 'flex', m: '2rem auto' }}>
-        <ProfileCard userInfo={userInfo} />
+        {userInfo && <ProfileCard userInfo={userInfo} />}
       </Box>
     </>
   )
 }
 
 export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps ({ req, query }: any): Promise<GetServerSidePropsResult<{
-    userInfo: GitlabUserInfo | null,
-    error: { code: number, message: string } | null
-  }>> {
+  async function getServerSideProps ({ req, query }: any): Promise<GetServerSidePropsResult<ProfileProps>> {
     try {
 
       if (req.session?.tokens && isExpiredAccessToken(req.session.tokens)) {
