@@ -1,6 +1,7 @@
 import React from 'react'
 import { withIronSessionSsr } from "iron-session/next"
 import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
+import { GetServerSidePropsContext } from 'next'
 
 const Logout = () => {
   return (
@@ -9,7 +10,7 @@ const Logout = () => {
 }
 
 export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps ({ req }: any) {
+  async function getServerSideProps ({ req }: GetServerSidePropsContext) {
     await req.session.destroy()
 
     return {

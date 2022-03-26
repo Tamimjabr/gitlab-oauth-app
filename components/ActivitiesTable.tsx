@@ -7,8 +7,6 @@ import {
   GridToolbarExport,
   GridToolbarDensitySelector,
   GridColDef,
-  GridCellValue,
-  GridValueFormatterParams,
 } from '@mui/x-data-grid'
 import { GitlabUserEvent } from '../intergrations/gitlab-user-info'
 

@@ -2,7 +2,7 @@ import Error from 'next/error'
 import React from 'react'
 import { getGitlabUserEvents, GitlabUserEvent, GitlabUserInfo } from '../intergrations/gitlab-user-info'
 import { withIronSessionSsr } from "iron-session/next"
-import { GetServerSidePropsResult } from 'next'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
 import ActivitiesTable from '../components/ActivitiesTable'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
@@ -10,7 +10,8 @@ import ProfileTabs from '../components/ProfileTabs'
 import { Typography } from '@mui/material'
 import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
 import Head from 'next/head'
-import {  getCsrfTokenAndSaveOnSession } from '../utils/csrf-token-handler'
+import { getCsrfTokenAndSaveOnSession } from '../utils/csrf-token-handler'
+
 
 type ActivitiesProps = {
   userInfo: GitlabUserInfo | null,
@@ -18,7 +19,7 @@ type ActivitiesProps = {
   error: { code: number, message: string } | null
 }
 
-const Activities = ({ userEvents, userInfo, error }: ActivitiesProps) => {
+const Activities = ({ userEvents, error }: ActivitiesProps) => {
 
   if (error?.code) {
     return <Error statusCode={error.code} title={error.message} />
@@ -41,14 +42,14 @@ const Activities = ({ userEvents, userInfo, error }: ActivitiesProps) => {
 }
 
 export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps ({ req }: any): Promise<GetServerSidePropsResult<ActivitiesProps>> {
+  async function getServerSideProps ({ req }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<ActivitiesProps>> {
     try {
       if (req.session?.tokens && isExpiredAccessToken(req.session.tokens)) {
         await updateTokens(req)
       }
 
       const state = await getCsrfTokenAndSaveOnSession(req)
-      
+
       if (!req.session.tokens || !req.session.userInfo) {
         return {
           redirect: {

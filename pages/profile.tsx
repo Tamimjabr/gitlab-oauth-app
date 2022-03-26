@@ -4,7 +4,7 @@ import { getGitlabOauthTokens } from '../intergrations/gitlab-oauth-tokens'
 import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
 import { getGitlabUserInfo, GitlabUserInfo } from '../intergrations/gitlab-user-info'
 import Error from 'next/error'
-import { GetServerSidePropsResult } from 'next'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import ProfileCard from '../components/ProfileCard'
 import { Box } from '@mui/material'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
@@ -39,7 +39,7 @@ const Profile = ({ userInfo, error }: ProfileProps) => {
 }
 
 export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps ({ req, query }: any): Promise<GetServerSidePropsResult<ProfileProps>> {
+  async function getServerSideProps ({ req, query }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<ProfileProps>> {
     try {
 
       if (req.session?.tokens && isExpiredAccessToken(req.session.tokens)) {
@@ -62,7 +62,7 @@ export const getServerSideProps = withIronSessionSsr(
           }
         }
 
-        const tokens = await getGitlabOauthTokens(code)
+        const tokens = await getGitlabOauthTokens(code as string)
         req.session.tokens = tokens
 
         await req.session.save()
