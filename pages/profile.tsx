@@ -11,6 +11,7 @@ import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import ProfileTabs from '../components/ProfileTabs'
 import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
 import Head from 'next/head'
+import { getCsrfTokenAndSaveOnSession } from '../utils/csrf-token-handler'
 
 type ProfileProps = {
   userInfo: GitlabUserInfo | null,
@@ -46,7 +47,21 @@ export const getServerSideProps = withIronSessionSsr(
       }
 
       if (query.code) {
-        const code = query.code
+        const { code, state } = query
+
+        // check CSRF token sent back from Gitlab
+        if (state !== req.session.state) {
+          return {
+            props: {
+              userInfo: null,
+              error: {
+                code: 401,
+                message: 'Unauthorized',
+              }
+            }
+          }
+        }
+
         const tokens = await getGitlabOauthTokens(code)
         req.session.tokens = tokens
 
@@ -58,9 +73,11 @@ export const getServerSideProps = withIronSessionSsr(
           },
         }
       } else if (!req.session.tokens) {
+        // if no tokens, redirect to gitlab oauth page
+        const state = await getCsrfTokenAndSaveOnSession(req)
         return {
           redirect: {
-            destination: getGitlabOauthUrl(),
+            destination: getGitlabOauthUrl(state),
             permanent: false,
           },
         }

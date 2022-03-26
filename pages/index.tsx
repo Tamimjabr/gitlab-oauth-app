@@ -8,8 +8,9 @@ import styles from '../styles/Home.module.css'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import { withIronSessionSsr } from "iron-session/next"
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import {  getCsrfTokenAndSaveOnSession } from '../utils/csrf-token-handler'
 
-const Home = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
+const Home = ({ userInfo, state }: { userInfo: GitlabUserInfo | null, state: string | null }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -28,8 +29,8 @@ const Home = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
               Visit Your Profile < AccountCircleRoundedIcon sx={{ marginLeft: '0.2rem' }} />
             </Button>
           </Link>
-        ) : (
-          <Link href={getGitlabOauthUrl()} passHref>
+        ) : state && (
+          <Link href={getGitlabOauthUrl(state)} passHref>
             <Button variant="contained" size="large" sx={{ m: '1rem' }}>
               Login Here
             </Button>
@@ -54,19 +55,24 @@ const Home = ({ userInfo }: { userInfo: GitlabUserInfo | null }) => {
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps ({ req }: any): Promise<GetServerSidePropsResult<{
     userInfo: GitlabUserInfo | null,
+    state: string | null
   }>> {
 
     if (req.session?.userInfo) {
       return {
         props: {
           userInfo: req.session?.userInfo,
+          state: null
         }
       }
     }
+    // generate one time token for gitlab oauth url to check when the user redirected back
+    const state = await getCsrfTokenAndSaveOnSession(req)
 
     return {
       props: {
         userInfo: null,
+        state: state
       }
     }
   },

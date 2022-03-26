@@ -10,6 +10,7 @@ import ProfileTabs from '../components/ProfileTabs'
 import { Typography } from '@mui/material'
 import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
 import Head from 'next/head'
+import {  getCsrfTokenAndSaveOnSession } from '../utils/csrf-token-handler'
 
 type ActivitiesProps = {
   userInfo: GitlabUserInfo | null,
@@ -46,10 +47,12 @@ export const getServerSideProps = withIronSessionSsr(
         await updateTokens(req)
       }
 
+      const state = await getCsrfTokenAndSaveOnSession(req)
+      
       if (!req.session.tokens || !req.session.userInfo) {
         return {
           redirect: {
-            destination: getGitlabOauthUrl(),
+            destination: getGitlabOauthUrl(state),
             permanent: false,
           },
         }

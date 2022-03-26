@@ -16,6 +16,7 @@
     "@mui/x-data-grid": "^5.6.1",
     "animate.css": "^4.1.1",
     "axios": "^0.26.1",
+    "crypto-random-string": "^4.0.0",
     "iron-session": "^6.1.1",
     "next": "12.1.0",
     "qs": "^6.10.3",
