@@ -1,6 +1,6 @@
 import cryptoRandomString from 'crypto-random-string'
 import { IncomingMessage } from 'http';
-import { GetServerSidePropsContext } from 'next';
+
 
 
 export const getCsrfTokenAndSaveOnSession = async (req: IncomingMessage): Promise<string> => {

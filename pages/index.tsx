@@ -1,3 +1,9 @@
+/**
+ * Home page '/'
+ *
+ * @author Tamim Jabr
+ * @version 1.0.0
+ */
 import { Button } from '@mui/material'
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import Head from 'next/head'

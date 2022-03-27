@@ -1,3 +1,9 @@
+/**
+ * The ProfileCard component is the component used to display the user information
+ *
+ * @author Tamim Jabr
+ * @version 1.0.0
+ */
 import * as React from 'react'
 import Card from '@mui/material/Card'
 import { blue } from '@mui/material/colors'

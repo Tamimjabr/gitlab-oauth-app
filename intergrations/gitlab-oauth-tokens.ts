@@ -15,7 +15,7 @@ export interface Tokens {
   createdAt: number
 }
 
-const url = "https://gitlab.lnu.se/oauth/token"
+const GITLAB_AUTH_URL = "https://gitlab.lnu.se/oauth/token"
 
 export const getGitlabOauthTokens = async (code: string): Promise<Tokens> => {
   try {
@@ -27,7 +27,7 @@ export const getGitlabOauthTokens = async (code: string): Promise<Tokens> => {
       redirect_uri: process.env.NEXT_PUBLIC_CALLBACK_URL as string,
     }
 
-    const response = await axios.post<GitLabTokensInfo>(url, qs.stringify(params))
+    const response = await axios.post<GitLabTokensInfo>(GITLAB_AUTH_URL, qs.stringify(params))
 
     return {
       accessToken: response.data.access_token,
@@ -51,7 +51,7 @@ export const refreshGitlabAccessToken = async (tokens: Tokens): Promise<Tokens> 
       redirect_uri: process.env.NEXT_PUBLIC_CALLBACK_URL as string,
     }
 
-    const response = await axios.post<GitLabTokensInfo>(url, qs.stringify(params))
+    const response = await axios.post<GitLabTokensInfo>(GITLAB_AUTH_URL, qs.stringify(params))
     return {
       accessToken: response.data.access_token,
       refreshToken: response.data.refresh_token,

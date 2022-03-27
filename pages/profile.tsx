@@ -1,3 +1,9 @@
+/**
+ * Profile page used to display the user information
+ *
+ * @author Tamim Jabr
+ * @version 1.0.0
+ */
 import React from 'react'
 import { withIronSessionSsr } from "iron-session/next"
 import { getGitlabOauthTokens } from '../intergrations/gitlab-oauth-tokens'

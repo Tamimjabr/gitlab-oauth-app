@@ -1,3 +1,9 @@
+/**
+ * Used to place the stylesheet in the document head for all pages.
+ *
+ * @author Tamim Jabr
+ * @version 1.0.0
+ */
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document () {

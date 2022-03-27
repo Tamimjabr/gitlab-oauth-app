@@ -1,3 +1,9 @@
+/**
+ * THE HEADER COMPONENT is a bar to display the title of the page and links to the other pages.
+ *
+ * @author Tamim Jabr
+ * @version 1.0.0
+ */
 import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'

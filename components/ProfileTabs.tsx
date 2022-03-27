@@ -1,3 +1,9 @@
+/**
+ * Represents the links for profile and activities pages.
+ *
+ * @author Tamim Jabr
+ * @version 1.0.0
+ */
 import { useState } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'

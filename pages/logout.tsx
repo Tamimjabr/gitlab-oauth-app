@@ -1,3 +1,9 @@
+/**
+ * Logout page used to destroy the session and redirect to the index page
+ *
+ * @author Tamim Jabr
+ * @version 1.0.0
+ */
 import React from 'react'
 import { withIronSessionSsr } from "iron-session/next"
 import { IRON_SESSION_CONFIG } from '../config/iron-session-config'

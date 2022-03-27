@@ -1,3 +1,9 @@
+/**
+ * The ActivitiesTable component is a table that displays the activities
+ *
+ * @author Tamim Jabr
+ * @version 1.0.0
+ */
 import * as React from 'react'
 import {
   DataGrid,

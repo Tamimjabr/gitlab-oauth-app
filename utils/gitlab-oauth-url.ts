@@ -1,5 +1,10 @@
 import qs from 'qs'
 
+/**
+ * Construct a URL to the GitLab OAuth endpoint using  application ID, redirect URL
+ * and state that works as csrf token.
+ *
+ */
 export const getGitlabOauthUrl = (state: string): string => {
   const gitlabOauthUrl = 'https://gitlab.lnu.se/oauth/authorize'
   const params = {
