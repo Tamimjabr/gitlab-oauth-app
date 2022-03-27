@@ -14,8 +14,8 @@ import {
   GridToolbarDensitySelector,
   GridColDef,
 } from '@mui/x-data-grid'
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { GitlabUserEvent } from '../intergrations/gitlab-user-info'
-
 
 
 const columns: GridColDef[] = [
@@ -51,13 +51,15 @@ function CustomToolbar () {
 }
 
 export default function ActivitiesTable ({ rows }: { rows: GitlabUserEvent[] }) {
+  const smallScreen = useMediaQuery('(max-width:700px)');
   return (
-    <div style={{ height: 500, width: '80%', margin: '1rem auto' }}>
+    <div style={{ height: 500, width: `${smallScreen ? '100%' : '80%'}`, margin: '1rem auto', backgroundColor: 'ActiveBorder' }}>
       <DataGrid
         rows={rows} columns={columns}
         components={{
           Toolbar: CustomToolbar,
         }}
+        sx={{ '& [role="row"]:nth-child(even)': { backgroundColor: '#e7e7e7' } }}
       />
     </div>
   )
