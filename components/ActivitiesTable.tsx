@@ -29,7 +29,7 @@ const columns: GridColDef[] = [
   },
   { field: "action_name", headerName: "Action Name", width: 150 },
   { field: "target_type", headerName: "Target Type", width: 150 },
-  { field: "target_title", headerName: "Target Title", width: 150 },
+  { field: "target_title", headerName: "Target Title", width: 300 },
   {
     field: 'push_data', headerName: "Commit Title", width: 500, valueGetter: (params: {
       value: {
@@ -59,7 +59,15 @@ export default function ActivitiesTable ({ rows }: { rows: GitlabUserEvent[] }) 
         components={{
           Toolbar: CustomToolbar,
         }}
-        sx={{ '& [role="row"]:nth-child(even)': { backgroundColor: '#e7e7e7' } }}
+        sx={{
+          '& 	.MuiDataGrid-row:nth-child(even)': { backgroundColor: '#e7e7e7' },
+          '& .MuiDataGrid-cell': {
+            overflow: 'auto',
+            overflowWrap: 'break-word',
+            whiteSpace: 'normal',
+          }
+        }}
+        density='comfortable'
       />
     </div>
   )
