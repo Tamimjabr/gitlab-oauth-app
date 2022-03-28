@@ -5,9 +5,8 @@
  * @version 1.0.0
  */
 import React from 'react'
-import { withIronSessionSsr } from "iron-session/next"
 import { getGitlabOauthTokens } from '../intergrations/gitlab-oauth-tokens'
-import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
+import { withSessionSsr } from '../config/iron-session-config'
 import { getGitlabUserInfo, GitlabUserInfo } from '../intergrations/gitlab-user-info'
 import Error from 'next/error'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
@@ -44,7 +43,7 @@ const Profile = ({ userInfo, error }: ProfileProps) => {
   )
 }
 
-export const getServerSideProps = withIronSessionSsr(
+export const getServerSideProps = withSessionSsr(
   async function getServerSideProps ({ req, query }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<ProfileProps>> {
     try {
 
@@ -111,8 +110,7 @@ export const getServerSideProps = withIronSessionSsr(
         }
       }
     }
-  },
-  IRON_SESSION_CONFIG
+  }
 )
 
 export default Profile

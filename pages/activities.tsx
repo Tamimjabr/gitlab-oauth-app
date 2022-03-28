@@ -1,9 +1,7 @@
 import Error from 'next/error'
 import React from 'react'
 import { getGitlabUserEvents, GitlabUserEvent, GitlabUserInfo } from '../intergrations/gitlab-user-info'
-import { withIronSessionSsr } from "iron-session/next"
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
 import ActivitiesTable from '../components/ActivitiesTable'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
 import ProfileTabs from '../components/ProfileTabs'
@@ -11,6 +9,7 @@ import { Typography } from '@mui/material'
 import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-checker'
 import Head from 'next/head'
 import { getCsrfTokenAndSaveOnSession } from '../utils/csrf-token-handler'
+import { withSessionSsr } from '../config/iron-session-config'
 
 
 type ActivitiesProps = {
@@ -41,7 +40,7 @@ const Activities = ({ userEvents, error }: ActivitiesProps) => {
   )
 }
 
-export const getServerSideProps = withIronSessionSsr(
+export const getServerSideProps = withSessionSsr(
   async function getServerSideProps ({ req }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<ActivitiesProps>> {
     try {
       if (req.session?.tokens && isExpiredAccessToken(req.session.tokens)) {
@@ -82,9 +81,9 @@ export const getServerSideProps = withIronSessionSsr(
         }
       }
     }
-  },
-  IRON_SESSION_CONFIG
+  }
 )
 
 
 export default Activities
+

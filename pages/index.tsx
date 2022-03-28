@@ -8,13 +8,12 @@ import { Button } from '@mui/material'
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
 import { GitlabUserInfo } from '../intergrations/gitlab-user-info'
 import styles from '../styles/Home.module.css'
 import { getGitlabOauthUrl } from '../utils/gitlab-oauth-url'
-import { withIronSessionSsr } from "iron-session/next"
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { getCsrfTokenAndSaveOnSession } from '../utils/csrf-token-handler'
+import { withSessionSsr } from '../config/iron-session-config'
 
 
 const Home = ({ userInfo, state }: { userInfo: GitlabUserInfo | null, state: string | null }) => {
@@ -59,7 +58,7 @@ const Home = ({ userInfo, state }: { userInfo: GitlabUserInfo | null, state: str
   )
 }
 
-export const getServerSideProps = withIronSessionSsr(
+export const getServerSideProps = withSessionSsr(
   async function getServerSideProps ({ req }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<{
     userInfo: GitlabUserInfo | null,
     state: string | null
@@ -82,8 +81,7 @@ export const getServerSideProps = withIronSessionSsr(
         state: state
       }
     }
-  },
-  IRON_SESSION_CONFIG
+  }
 )
 
 export default Home

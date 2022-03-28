@@ -5,8 +5,7 @@
  * @version 1.0.0
  */
 import React from 'react'
-import { withIronSessionSsr } from "iron-session/next"
-import { IRON_SESSION_CONFIG } from '../config/iron-session-config'
+import { withSessionSsr } from '../config/iron-session-config'
 import { GetServerSidePropsContext } from 'next'
 
 const Logout = () => {
@@ -15,7 +14,7 @@ const Logout = () => {
   )
 }
 
-export const getServerSideProps = withIronSessionSsr(
+export const getServerSideProps = withSessionSsr(
   async function getServerSideProps ({ req }: GetServerSidePropsContext) {
     await req.session.destroy()
 
@@ -25,9 +24,7 @@ export const getServerSideProps = withIronSessionSsr(
         permanent: false,
       },
     }
-
-  },
-  IRON_SESSION_CONFIG
+  }
 )
 
 
