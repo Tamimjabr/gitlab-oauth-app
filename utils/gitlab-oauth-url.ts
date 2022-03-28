@@ -1,7 +1,7 @@
 import qs from 'qs'
 
 /**
- * Construct a URL to the GitLab OAuth endpoint using  application ID, redirect URL
+ * Construct a URL to the GitLab OAuth endpoint using  application ID, redirect URL, scopes
  * and state that works as csrf token.
  *
  */
