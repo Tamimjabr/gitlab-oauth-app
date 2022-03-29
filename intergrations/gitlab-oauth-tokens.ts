@@ -15,7 +15,7 @@ export interface Tokens {
   createdAt: number
 }
 
-const GITLAB_AUTH_URL = "https://gitlab.lnu.se/oauth/token"
+const GITLAB_AUTH_URL = "https://gitlab.lnu.se/oauth"
 const GITLAB_OAUTH_PARAMS = {
   client_id: process.env.NEXT_PUBLIC_APPLICATION_ID as string,
   client_secret: process.env.APPLICATION_SECRET as string,
@@ -34,7 +34,7 @@ export const getGitlabOauthTokens = async (code: string): Promise<Tokens> => {
       ...GITLAB_OAUTH_PARAMS,
     }
 
-    const response = await axios.post<GitLabTokensInfo>(GITLAB_AUTH_URL, qs.stringify(params))
+    const response = await axios.post<GitLabTokensInfo>(`${GITLAB_AUTH_URL}/token`, qs.stringify(params))
 
     return {
       accessToken: response.data.access_token,
@@ -59,7 +59,7 @@ export const refreshGitlabTokens = async (tokens: Tokens): Promise<Tokens> => {
       ...GITLAB_OAUTH_PARAMS
     }
 
-    const response = await axios.post<GitLabTokensInfo>(GITLAB_AUTH_URL, qs.stringify(params))
+    const response = await axios.post<GitLabTokensInfo>(`${GITLAB_AUTH_URL}/token`, qs.stringify(params))
     return {
       accessToken: response.data.access_token,
       refreshToken: response.data.refresh_token,
@@ -68,5 +68,23 @@ export const refreshGitlabTokens = async (tokens: Tokens): Promise<Tokens> => {
     }
   } catch (error: any) {
     throw new Error("Failed to refresh GitLab OAuth tokens")
+  }
+}
+
+/**
+ * Refresh user tokens from Gitlab.
+ *
+ */
+export const revokeGitlabToken = async (token: string): Promise<any> => {
+  try {
+    const params = {
+      token,
+      ...GITLAB_OAUTH_PARAMS
+    }
+
+    return await axios.post(`${GITLAB_AUTH_URL}/revoke`, qs.stringify(params))
+  } catch (error: any) {
+    console.log(error.message)
+    throw new Error("Failed to revoke GitLab OAuth tokens")
   }
 }
