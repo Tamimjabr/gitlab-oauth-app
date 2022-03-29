@@ -10,7 +10,6 @@ import {
   GridToolbarContainer,
   GridToolbarColumnsButton,
   GridToolbarFilterButton,
-  GridToolbarExport,
   GridToolbarDensitySelector,
   GridColDef,
 } from '@mui/x-data-grid'
@@ -45,7 +44,6 @@ function CustomToolbar () {
       <GridToolbarColumnsButton />
       <GridToolbarFilterButton />
       <GridToolbarDensitySelector />
-      <GridToolbarExport />
     </GridToolbarContainer>
   )
 }
@@ -53,7 +51,7 @@ function CustomToolbar () {
 export default function ActivitiesTable ({ rows }: { rows: GitlabUserEvent[] }) {
   const smallScreen = useMediaQuery('(max-width:700px)');
   return (
-    <div style={{ height: 500, width: `${smallScreen ? '100%' : '80%'}`, margin: '1rem auto', backgroundColor: 'white' }}>
+    <div style={{ height: 600, width: `${smallScreen ? '100%' : '80%'}`, margin: '1rem auto', backgroundColor: 'white' }}>
       <DataGrid
         rows={rows} columns={columns}
         components={{
@@ -64,7 +62,7 @@ export default function ActivitiesTable ({ rows }: { rows: GitlabUserEvent[] }) 
           '& .MuiDataGrid-cell': {
             overflow: 'auto',
             overflowWrap: 'break-word',
-            whiteSpace: 'normal',
+            whiteSpace: 'normal'
           }
         }}
         density='comfortable'
