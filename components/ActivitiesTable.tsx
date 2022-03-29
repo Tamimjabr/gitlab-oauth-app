@@ -58,7 +58,7 @@ export default function ActivitiesTable ({ rows }: { rows: GitlabUserEvent[] }) 
           Toolbar: CustomToolbar,
         }}
         sx={{
-          '& 	.MuiDataGrid-row:nth-child(even)': { backgroundColor: '#e7e7e7' },
+          '& 	.MuiDataGrid-row:nth-of-type(even)': { backgroundColor: '#e7e7e7' },
           '& .MuiDataGrid-cell': {
             overflow: 'auto',
             overflowWrap: 'break-word',
