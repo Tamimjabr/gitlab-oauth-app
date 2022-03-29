@@ -1,5 +1,5 @@
 import Error from 'next/error'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { getGitlabUserEvents, GitlabUserEvent, GitlabUserInfo } from '../intergrations/gitlab-user-info'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import ActivitiesTable from '../components/ActivitiesTable'
@@ -10,6 +10,7 @@ import { isExpiredAccessToken, updateTokens } from '../utils/tokens-expiration-c
 import Head from 'next/head'
 import { getCsrfTokenAndSaveOnSession } from '../utils/csrf-token-handler'
 import { withSessionSsr } from '../config/iron-session-config'
+import Loader from '../components/Loader'
 
 
 type ActivitiesProps = {
@@ -19,10 +20,23 @@ type ActivitiesProps = {
 }
 
 const Activities = ({ userEvents, error }: ActivitiesProps) => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (userEvents) {
+      setLoading(false)
+    }
+
+  }, [userEvents])
 
   if (error?.code) {
     return <Error statusCode={error.code} title={error.message} />
   }
+
+  if (loading) {
+    return <Loader />
+  }
+
   return (
     <>
       <Head>
@@ -32,7 +46,7 @@ const Activities = ({ userEvents, error }: ActivitiesProps) => {
       </Head>
       <ProfileTabs />
       <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%", textDecoration: 'underline' }}>Your Last 101 Activities</Typography>
-      <div className='animate__animated animate__fadeInUp'>
+      <div >
         {userEvents && <ActivitiesTable rows={userEvents} />}
       </div>
     </>
