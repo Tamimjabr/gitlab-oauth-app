@@ -46,7 +46,7 @@ const Activities = ({ userEvents, error }: ActivitiesProps) => {
       </Head>
       <ProfileTabs />
       <Typography variant='h5' sx={{ textAlign: 'center', m: '1rem auto', width: "50%", textDecoration: 'underline' }}>Your Last 101 Activities</Typography>
-      <div >
+      <div className='animate__animated animate__fadeInUp'>
         {userEvents && <ActivitiesTable rows={userEvents} />}
       </div>
     </>
