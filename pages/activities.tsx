@@ -90,7 +90,7 @@ export const getServerSideProps = withSessionSsr(
           userEvents: null,
           error: {
             code: 401,
-            message: error.message
+            message: 'Unauthorized. ' + error.message
           }
         }
       }
